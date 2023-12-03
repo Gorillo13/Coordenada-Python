@@ -8,18 +8,19 @@ def coordenada(a):
     try:
         match a:
             case 1:
-                while True:
-                    if cancelar.get():
-                        break
-                    resultado.set(pa.position)
-            case 2:
-                lista = []
-                for i in range(1, 12):
-                    lista.append(pa.position())
-                    time.sleep(1)
-                return statistics.mode(lista)
+                posicao = pa.position()
+                resultado.set(f'X: {posicao.x}\nY: {posicao.y}')
+                root.after(100, lambda: coordenada(modo))
     except ValueError:
         resultado.set('erro')
+
+def modo1():
+    global modo
+    modo = 1
+
+def modo2():
+    global modo
+    modo = 2
 
 root = Tk()
 root.title('Sla')
@@ -31,7 +32,7 @@ root.rowconfigure(0, weight=1)
 
 # Variáveis
 
-modo = IntVar()
+modo = 1
 titulo = StringVar()
 titulo.set('Coordenada')
 texto = StringVar()
@@ -48,8 +49,8 @@ ttk.Label(mainframe, textvariable=resultado).grid(column=1, row=3)
 
 # Botões
 
-ttk.Button(mainframe, text='Modo 1', command=lambda: modo.set(1)).grid(column=0, row=2)
-ttk.Button(mainframe, text='Modo 2', command=lambda: modo.set(2)).grid(column=2, row=2)
+ttk.Button(mainframe, text='Modo 1', command=modo1).grid(column=0, row=2)
+ttk.Button(mainframe, text='Modo 2', command=modo2).grid(column=2, row=2)
 ttk.Button(mainframe, text='Iniciar', command=lambda: coordenada(modo)).grid(column=0, row=4)
 ttk.Button(mainframe, text='Cancelar', command=lambda: cancelar.set(True)).grid(column=2, row=4)
 
