@@ -1,18 +1,17 @@
 from tkinter import *
 from tkinter import ttk
 import pyautogui as pa
-import time
 import statistics
 
 def coordenada(a):
-    try:
-        match a:
-            case 1:
+    match a:
+        case 1:
+            if (not parar.get()):
                 posicao = pa.position()
                 resultado.set(f'X: {posicao.x}\nY: {posicao.y}')
                 root.after(100, lambda: coordenada(modo))
-    except ValueError:
-        resultado.set('erro')
+            else:
+                parar.set(False)
 
 def modo1():
     global modo
@@ -38,8 +37,8 @@ titulo.set('Coordenada')
 texto = StringVar()
 texto.set('Texto')
 resultado = StringVar()
-cancelar = BooleanVar()
-cancelar.set(False)
+parar = BooleanVar()
+parar.set(False)
 
 # Caixas de Texto
 
@@ -52,6 +51,6 @@ ttk.Label(mainframe, textvariable=resultado).grid(column=1, row=3)
 ttk.Button(mainframe, text='Modo 1', command=modo1).grid(column=0, row=2)
 ttk.Button(mainframe, text='Modo 2', command=modo2).grid(column=2, row=2)
 ttk.Button(mainframe, text='Iniciar', command=lambda: coordenada(modo)).grid(column=0, row=4)
-ttk.Button(mainframe, text='Cancelar', command=lambda: cancelar.set(True)).grid(column=2, row=4)
+ttk.Button(mainframe, text='Parar', command=lambda: parar.set(True)).grid(column=2, row=4)
 
 root.mainloop()
