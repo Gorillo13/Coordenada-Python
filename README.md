@@ -10,4 +10,4 @@ Projeto desenvolvido com a intenção de aprender a usar a biblioteca Tkinter.
 
 ## Atenção:
 
-Projeto ainda em fase de testes, possível aparição de falhas.
+Projeto finalizado porém é possível à aparição de falhas. Estarei atento a qualquer notificação, sintam-se a vontate para apontar erros e melhorias assim também como usar o código para uso próprio
